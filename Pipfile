@@ -7,6 +7,8 @@ name = "pypi"
 django = "*"
 mysql-connector-python = "==8.0.26"
 django-debug-toolbar = "*"
+djangorestframework = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 
