@@ -241,7 +241,8 @@ SELECT COUNT(*) AS `__count`
 # Print the new student's id, full name, year, and gpa to the terminal
 # NOTE every time you execute this function a duplicate student will be created with a different primary key number
 def problem_five(request):
-
+    wizard1 = Student.objects.create(first_name='ME', last_name="is voolyvex", year=2022, gpa=3.5)
+    print(f'Id: {wizard1.id}\nFull Name: {wizard1.first_name} {wizard1.last_name}\nYear: {wizard1.year}\nGPA: {wizard1.gpa}')
     return complete(request)
 
 
@@ -276,7 +277,10 @@ def problem_six(request):
 
     # Make sure to set this equal to the primary key of the row you just created!
     student_id = 11
-
+    me = Student.objects.get(pk=student_id)
+    me.gpa = 3.9
+    me.save()
+    print(f'Id: {me.id}\nFull Name: {me.first_name} {me.last_name}\nGPA: {me.gpa}')
     return complete(request)
 
 
@@ -326,6 +330,7 @@ def problem_seven(request):
 
     try:
         student = Student.objects.get(pk=student_id)
+        student.delete()
     except ObjectDoesNotExist:
         print('Great! It failed and couldnt find the object because we deleted it!')
 
@@ -380,6 +385,10 @@ SELECT `school_db_student`.`id`,
 # Print out the instructors full name and number of courses to the console
 def bonus_problem(request):
 
+    instructor = Instructor.objects.all()
+    print(instructor)
+    q = Course.objects.annotate(num_courses=Count('instructor_id'))
+    print(q)
     return complete(request)
 
 
